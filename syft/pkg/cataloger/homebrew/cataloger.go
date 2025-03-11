@@ -9,7 +9,7 @@ func NewCataloger() pkg.Cataloger {
 	return generic.NewCataloger("homebrew-cataloger").
 		WithParserByGlobs(
 			parseHomebrewPackage,
-			"**/Cellar/*/*/.brew/*.rb",                  
-			"**/Homebrew/Library/Taps/*/*/Formula/*.rb", 
+			"**/Cellar/*/*/.brew/*.rb",
+			"**/Homebrew/Library/Taps/*/*/Formula/*.rb",
 		)
 }

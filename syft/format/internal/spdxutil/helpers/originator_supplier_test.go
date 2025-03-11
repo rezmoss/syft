@@ -359,7 +359,7 @@ func Test_OriginatorSupplier(t *testing.T) {
 			},
 			originator: "Organization: auth",
 			supplier:   "Organization: auth",
-		},		
+		},
 		{
 			name: "from wordpress plugin",
 			input: pkg.Package{

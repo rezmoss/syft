@@ -17,7 +17,7 @@ import (
 	"github.com/anchore/syft/syft/pkg/cataloger/githubactions"
 	"github.com/anchore/syft/syft/pkg/cataloger/golang"
 	"github.com/anchore/syft/syft/pkg/cataloger/haskell"
-	"github.com/anchore/syft/syft/pkg/cataloger/homebrew"	
+	"github.com/anchore/syft/syft/pkg/cataloger/homebrew"
 	"github.com/anchore/syft/syft/pkg/cataloger/java"
 	"github.com/anchore/syft/syft/pkg/cataloger/javascript"
 	"github.com/anchore/syft/syft/pkg/cataloger/kernel"

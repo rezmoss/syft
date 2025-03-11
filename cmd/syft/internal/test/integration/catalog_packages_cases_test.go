@@ -495,7 +495,7 @@ var commonTestCases = []testCase{
 			"homepage":    "https://github.com/sshock/AFFLIBv3",
 			"description": "Advanced Forensic Format",
 		},
-	},	
+	},
 	{
 		name:        "find php pecl package",
 		pkgType:     pkg.PhpPeclPkg,

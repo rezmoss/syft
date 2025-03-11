@@ -48,7 +48,7 @@ func parseHomebrewPackage(_ context.Context, resolver file.Resolver, _ *generic.
 
 	locations.Add(reader.Location)
 
-	cellarPath := filepath.Join(filepath.Dir(filepath.Dir(reader.Location.RealPath)))
+	cellarPath := filepath.Dir(filepath.Dir(reader.Location.RealPath))
 	locations.Add(file.NewLocation(cellarPath))
 
 	if resolver != nil {
