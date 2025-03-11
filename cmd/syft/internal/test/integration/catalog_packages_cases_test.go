@@ -485,6 +485,18 @@ var commonTestCases = []testCase{
 		},
 	},
 	{
+		name:        "find homebrew",
+		pkgType:     pkg.HomebrewPkg,
+		pkgLanguage: pkg.Ruby,
+		pkgInfo: map[string]string{
+			"name":        "afflib",
+			"fullName":    "afflib",
+			"tap":         "homebrew/core",
+			"homepage":    "https://github.com/sshock/AFFLIBv3",
+			"description": "Advanced Forensic Format",
+		},
+	},	
+	{
 		name:        "find php pecl package",
 		pkgType:     pkg.PhpPeclPkg,
 		pkgLanguage: pkg.PHP,
