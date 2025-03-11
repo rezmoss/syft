@@ -46,17 +46,17 @@ func parseHomebrewPackage(_ context.Context, resolver file.Resolver, _ *generic.
 
 	locations := file.NewLocationSet()
 
-	locations.Add(reader.Location)
+	locations.Add(reader.Location.WithAnnotation(pkg.EvidenceAnnotationKey, pkg.PrimaryEvidenceAnnotation))
 
 	cellarPath := filepath.Dir(filepath.Dir(reader.Location.RealPath))
-	locations.Add(file.NewLocation(cellarPath))
+	locations.Add(file.NewLocation(cellarPath).WithAnnotation(pkg.EvidenceAnnotationKey, pkg.SupportingEvidenceAnnotation))
 
 	if resolver != nil {
 		if matches, err := resolver.FilesByGlob(filepath.Join("/usr/local/bin", pkgName)); err == nil && len(matches) > 0 {
-			locations.Add(matches[0])
+			locations.Add(matches[0].WithAnnotation(pkg.EvidenceAnnotationKey, pkg.SupportingEvidenceAnnotation))
 		}
 		if matches, err := resolver.FilesByGlob(filepath.Join("/opt/homebrew/bin", pkgName)); err == nil && len(matches) > 0 {
-			locations.Add(matches[0])
+			locations.Add(matches[0].WithAnnotation(pkg.EvidenceAnnotationKey, pkg.SupportingEvidenceAnnotation))
 		}
 	}
 

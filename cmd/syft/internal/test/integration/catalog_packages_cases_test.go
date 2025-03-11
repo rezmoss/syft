@@ -489,11 +489,7 @@ var commonTestCases = []testCase{
 		pkgType:     pkg.HomebrewPkg,
 		pkgLanguage: pkg.Ruby,
 		pkgInfo: map[string]string{
-			"name":        "afflib",
-			"fullName":    "afflib",
-			"tap":         "homebrew/core",
-			"homepage":    "https://github.com/sshock/AFFLIBv3",
-			"description": "Advanced Forensic Format",
+			"afflib": "1.2.3",
 		},
 	},
 	{

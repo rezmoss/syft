@@ -23,14 +23,16 @@ func TestParseHomebrewPackage(t *testing.T) {
 		Name:      "foo",
 		Version:   "1.2.3",
 		Type:      pkg.HomebrewPkg,
+		Language:  pkg.Ruby,
 		Locations: locations,
+		FoundBy:   "homebrew-cataloger",
 		PURL:      "pkg:homebrew/foo@1.2.3",
 		Metadata: pkg.HomebrewMetadata{
-			Name:     "foo",
-			FullName: "foo",
-			Tap:      "homebrew/core",
-			Homepage: "https://example.com/foo",
-			Desc:     "A test Homebrew formula for Foo",
+			Name:        "foo",
+			FullName:    "foo",
+			Tap:         "homebrew/core",
+			Homepage:    "https://example.com/foo",
+			Description: "A test Homebrew formula for Foo",
 		},
 	}
 	expected.SetID()

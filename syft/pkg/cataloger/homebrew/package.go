@@ -14,11 +14,11 @@ func newHomebrewPackage(name, version, desc, homepage string, locations file.Loc
 		Locations: locations,
 		PURL:      packageURL(name, version),
 		Metadata: pkg.HomebrewMetadata{
-			Name:     name,
-			FullName: name,
-			Tap:      "homebrew/core",
-			Homepage: homepage,
-			Desc:     desc,
+			Name:        name,
+			FullName:    name,
+			Tap:         "homebrew/core",
+			Homepage:    homepage,
+			Description: desc,
 		},
 	}
 
