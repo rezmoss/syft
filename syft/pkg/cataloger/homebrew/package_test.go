@@ -2,7 +2,6 @@ package homebrew
 
 import (
 	"testing"
-
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
