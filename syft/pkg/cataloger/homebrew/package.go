@@ -12,6 +12,8 @@ func newHomebrewPackage(name, version, desc, homepage string, locations file.Loc
 		Version:   version,
 		Type:      pkg.HomebrewPkg,
 		Locations: locations,
+		Language:  pkg.Ruby,
+		FoundBy:   "homebrew-cataloger",
 		PURL:      packageURL(name, version),
 		Metadata: pkg.HomebrewMetadata{
 			Name:        name,
