@@ -748,14 +748,27 @@ func DefaultClassifiers() []binutils.Classifier {
 			FileGlob: "**/grafana",
 			EvidenceMatcher: binutils.MatchAny(
 				// [NUL][NUL][NUL][NUL]release-12.3.1[NUL][NUL][NUL][NUL]
-				m.FileContentsVersionMatcher(`\x00+release-(?P<version>[0-9]{2}\.[0-9]+\.[0-9]+)\x00+`),
+				m.FileContentsVersionMatcher(`\x00+release-(?P<version>[0-9]{2}\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00+`),
 				// HEAD[NUL][NUL][NUL][NUL]12.0.0[NUL][NUL]$a
 				// 11.0.0[NUL][NUL]$a
-				m.FileContentsVersionMatcher(`(?P<version>[0-9]{2}\.[0-9]+\.[0-9]+)\x00+\$a`),
+				m.FileContentsVersionMatcher(`(?P<version>[0-9]{2}\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00+\$a`),
 				// [NUL]0xDC0xBF10.4.19[NUL]
-				m.FileContentsVersionMatcher(`\x00.(?P<version>10\.[0-9]+\.[0-9]+)\x00`),
+				m.FileContentsVersionMatcher(`\x00.(?P<version>10\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00`),
 				// 9.5.21[NUL][NUL]v9.5.x[NUL][NUL][NUL][NUL][NUL][NUL]$a
-				m.FileContentsVersionMatcher(`(?P<version>9\.[0-9]+\.[0-9]+)\x00\x00v`),
+				m.FileContentsVersionMatcher(`(?P<version>9\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00\x00v`),
+				// HEAD[NUL][NUL][NUL][NUL]9.4.14[NUL][NUL] (grafana binary, 9.4.14+, 9.5.10+)
+				m.FileContentsVersionMatcher(`HEAD\x00+(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00+`),
+				// 10.4.10[NUL]v10.4.x[NUL] (grafana binary with branch name anchor)
+				m.FileContentsVersionMatcher(`(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00v[0-9]+\.[0-9]+\.x\x00`),
+				// 10.3.12[NUL]<4 bytes>[NUL][NUL][NUL][NUL]go1. (go version after grafana version)
+				m.FileContentsVersionMatcher(`(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00[^\x00]{1,8}\x00\x00\x00\x00go1\.`),
+				// go1.21.8[NUL][NUL]...11.0.0-preview[NUL] (go version before grafana version)
+				m.FileContentsVersionMatcher(`go1\.[0-9]+\.[0-9]+\x00+(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00`),
+				// 11.0.5+security-01[NUL][NUL]...[NUL]call frame too large
+				// 12.2.0-16557133545[NUL][NUL]...[NUL]call frame too large
+				m.FileContentsVersionMatcher(`(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00+call frame too large`),
+				// Go build flags fallback: main.version=10.0.0-preview
+				m.FileContentsVersionMatcher(`main\.version=(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)`),
 			),
 			Package: "grafana",
 			PURL:    mustPURL("pkg:generic/grafana@version"),
@@ -764,11 +777,18 @@ func DefaultClassifiers() []binutils.Classifier {
 		{
 			Class:    "grafana-binary",
 			FileGlob: "**/grafana-server",
-			EvidenceMatcher: m.FileContentsVersionMatcher(
+			EvidenceMatcher: binutils.MatchAny(
 				// HEAD[NUL][NUL][NUL][NUL]9.0.0[NUL]:[NUL]
 				// HEAD[NUL][NUL][NUL][NUL]:[NUL][NUL][NUL][NUL][NUL][NUL][NUL]7.5.17[NUL][NUL][NUL][NUL]
 				// HEAD[NUL][NUL][NUL][NUL]m[NUL]...[NUL][NUL]6.7.6[NUL][NUL][NUL].[NUL][NUL][NUL][NUL][NUL][NUL][NUL]:
-				`HEAD\x00+.*\x00+(?P<version>[0-9]\.[0-9]+\.[0-9]+)\x00+`),
+				m.FileContentsVersionMatcher(`HEAD\x00+.*\x00+(?P<version>[0-9]\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00+`),
+				// Go build flags fallback: main.version=6.7.0-beta1
+				m.FileContentsVersionMatcher(`main\.version=(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)`),
+				// [x05][NUL][x05][NUL]...6.0.0-beta1[NUL]... (old betas, Go 1.12-1.16 era data section)
+				m.FileContentsVersionMatcher(`\x05\x00\x05\x00+(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00`),
+				// <commit_hash>[NUL]...6.7.0-test[NUL]... (test builds with commit hash anchor)
+				m.FileContentsVersionMatcher(`[0-9a-f]{10}\x00+(?P<version>[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9][-a-zA-Z0-9.]*)?(\+[a-zA-Z0-9][-a-zA-Z0-9.]*)?)\x00`),
+			),
 			Package: "grafana",
 			PURL:    mustPURL("pkg:generic/grafana@version"),
 			CPEs:    singleCPE("cpe:2.3:a:grafana:grafana:*:*:*:*:*:*:*:*", cpe.NVDDictionaryLookupSource),

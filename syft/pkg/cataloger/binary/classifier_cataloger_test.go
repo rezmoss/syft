@@ -1723,6 +1723,116 @@ func Test_Cataloger_PositiveCases(t *testing.T) {
 			},
 		},
 		{
+			logicalFixture: "grafana/10.0.0-preview/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "10.0.0-preview",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@10.0.0-preview",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/11.0.5+security-01/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "11.0.5+security-01",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@11.0.5%2Bsecurity-01",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/12.2.0-16557133545/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "12.2.0-16557133545",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@12.2.0-16557133545",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/9.4.0-beta1/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "9.4.0-beta1",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@9.4.0-beta1",
+				Locations: locations("grafana-server"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/9.4.14/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "9.4.14",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@9.4.14",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/10.4.10/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "10.4.10",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@10.4.10",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/10.3.12/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "10.3.12",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@10.3.12",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/11.0.0-preview/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "11.0.0-preview",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@11.0.0-preview",
+				Locations: locations("grafana"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/7.0.0-beta1/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "7.0.0-beta1",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@7.0.0-beta1",
+				Locations: locations("grafana-server"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
+			logicalFixture: "grafana/6.7.0-test/linux-amd64",
+			expected: pkg.Package{
+				Name:      "grafana",
+				Version:   "6.7.0-test",
+				Type:      "binary",
+				PURL:      "pkg:generic/grafana@6.7.0-test",
+				Locations: locations("grafana-server"),
+				Metadata:  metadata("grafana-binary"),
+			},
+		},
+		{
 			logicalFixture: "envoy/1.36.4/linux-amd64",
 			expected: pkg.Package{
 				Name:      "envoy",

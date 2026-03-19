@@ -1,0 +1,8 @@
+name: grafana
+offset: 71232004
+length: 120
+snippetSha256: ceee5901b21a3b7b096175cecf16c3fdc3364ec2012defc9b9771a38a72c65fd
+fileSha256: 891c7d44d4446c607424315e2cfc7b17617b0db938f76e8e77134f722e3824d5
+
+### byte snippet to follow ###
+flags=-static -w -X main.version=10.0.0-preview -X main.commit=e000d93ab3 -X main.buildstamp=1685458820 -X main.buildBra

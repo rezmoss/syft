@@ -989,7 +989,7 @@ from-images:
       - /usr/share/grafana/bin/grafana
 
   - name: grafana
-    version: 9.4.0
+    version: 9.4.0-beta1
     images:
       - ref: grafana/grafana:9.4.0-beta1@sha256:d0060bcf84f0a0897e7c6c7e1b8740d89d10bf55b2dd45ba45942d36e40cdcc7
         platform: linux/amd64
@@ -1019,6 +1019,30 @@ from-images:
         platform: linux/amd64
     paths:
       - /usr/share/grafana/bin/grafana-server
+
+  - name: grafana
+    version: 10.0.0-preview
+    images:
+      - ref: grafana/grafana:10.0.0-preview@sha256:dc1ca23c00e65c17012b1dcd8345e3ea9d9d12d209aa740565911b780edb0d86
+        platform: linux/amd64
+    paths:
+      - /usr/share/grafana/bin/grafana
+
+  - name: grafana
+    version: 11.0.5+security-01
+    images:
+      - ref: grafana/grafana:11.0.5-security-01@sha256:0ba037897c6f22f26b7d289eb1f651ed4d9d552ea454ace60307ecd0585cbee1
+        platform: linux/amd64
+    paths:
+      - /usr/share/grafana/bin/grafana
+
+  - name: grafana
+    version: 12.2.0-16557133545
+    images:
+      - ref: grafana/grafana:12.2.0-16557133545@sha256:06b316684d506be82587d99885d22d5b3f404b13414fd1d9a382c3ac2bd9169e
+        platform: linux/amd64
+    paths:
+      - /usr/share/grafana/bin/grafana
 
   - name: qt
     version: 6.5.0

@@ -1,0 +1,8 @@
+name: grafana-server
+offset: 840651
+length: 120
+snippetSha256: 17f1206e7c1d3cd7bd0095fc0d56a66ba8794fd89ef27d90dd68ddc6b03930c5
+fileSha256: a5ea17e46883940809ccfd57de1ed2b4b5c38723a9ccbcaa6f78b2b5c0196fec
+
+### byte snippet to follow ###
+flags=-static -w -X main.version=9.4.0-beta1 -X main.commit=1b0f5f0a81 -X main.buildstamp=1675082842 -X main.buildBranch
